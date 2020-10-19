@@ -1,6 +1,9 @@
 import { Quote } from './Quote.js';
 
-class Game {
+class Game{
+  currentStep = 0;
+  lastStep = 7;
+
   quotes = [
     {
       text: "pan tadeusz",
@@ -33,7 +36,17 @@ class Game {
   }
 
   guess(letter) {
-    console.log(letter);
+    event.target.disabled = true;
+    if(this.quote.guess(letter)) {
+      this.drawQuote()
+    } else {
+      this.currentStep++;
+      document.getElementsByClassName('step')[this.currentStep].style.opacity = 1;
+      if(this.currentStep == this.lastStep) {
+        this.loosing();
+      }
+    };
+    
   }
 
   drawLetters() {
@@ -41,12 +54,41 @@ class Game {
       const label = (i + 10).toString(36);
       const button = document.createElement("button");
       button.innerHTML = label;
-      button.addEventListener("click", () => this.guess(label));
+      button.addEventListener("click", (event) => this.guess(label, event));
       this.lettersWrapper.appendChild(button);
     }
   }
 
+  drawQuote() {
+    const content = this.quote.getContent();
+    this.wordWrapper.innerHTML = content;
+    if (!content.includes('_')) {
+      this.winning()
+    }
+  }
+
   start() {
+    document.getElementsByClassName('step')[this.currentStep].style.opacity = 1;
     this.drawLetters();
+    this.drawQuote()
+  }
+
+  winning() {
+    this.wordWrapper.innerHTML = "YOU WIN";
+    this.lettersWrapper. innerHTML = '';
+  }
+
+  loosing() {
+    this.wordWrapper.innerHTML = "YOU LOOSE";
+    this.lettersWrapper. innerHTML = '';
   }
 }
+
+const game = new Game({
+  lettersWrapper: document.getElementById('letters'),
+  categoryWrapper: document.getElementById('category'),
+  wordWrapper: document.getElementById('word'),
+  outputWrapper: document.getElementById('output')
+});
+
+game.start();

@@ -8,24 +8,38 @@
 </head>
 <body>
     <section id="hangman">
-        <div id=output></div>
+        <div id=output>
+            <di class="step">
+                <img src="images/1.png" alt="">
+            </di>
+            <di class="step">
+                <img src="images/2.png" alt="">
+            </di>
+            <di class="step">
+                <img src="images/3.png" alt="">
+            </di>
+            <di class="step">
+                <img src="images/4.png" alt="">
+            </di>
+            <di class="step">
+                <img src="images/5.png" alt="">
+            </di>
+            <di class="step">
+                <img src="images/6.png" alt="">
+            </di>
+            <di class="step">
+                <img src="images/7.png" alt="">
+            </di>
+            <di class="step">
+                <img src="images/8.png" alt="">
+            </di>
+        </div>
         <div id=word></div>
         <div id=category></div>
         <div id=letters></div>
 
     </section>
     
-    <script src="app/Game.js" type="text/javascript "></script>
-
-    <script>
-        const game = new Game({
-            lettersWrapper: document.getElementById('letters'),
-            categoryWrapper: document.getElementById('category'),
-            wordWrapper: document.getElementById('word'),
-            outputWrapper: document.getElementById('output')
-        });
-
-        game.start();
-    </script>
+    <script src="app/Game.js" type="module"></script>
 </body>
 </html>
